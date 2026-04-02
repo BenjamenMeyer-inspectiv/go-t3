@@ -1,0 +1,20 @@
+# Global owner — all files
+* @BenjamenMeyer-inspectiv
+
+# Game logic
+/internal/game/ @BenjamenMeyer-inspectiv
+/internal/ai/   @BenjamenMeyer-inspectiv
+
+# Server API
+/internal/api/  @BenjamenMeyer-inspectiv
+/cmd/server/    @BenjamenMeyer-inspectiv
+
+# Client / UI
+/internal/ui/   @BenjamenMeyer-inspectiv
+/cmd/client/    @BenjamenMeyer-inspectiv
+
+# Auth
+/internal/auth/ @BenjamenMeyer-inspectiv
+
+# Shared types
+/pkg/           @BenjamenMeyer-inspectiv
