@@ -1,4 +1,4 @@
-.PHONY: build run test fmt lint help run-server build-server test-cover
+.PHONY: build run test fmt lint help run-server build-server run-client build-client test-cover
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
@@ -24,6 +24,12 @@ run-server: ## Run the server (PORT=8080)
 
 build-server: ## Build server binary
 	go build -o bin/server ./cmd/server
+
+run-client: ## Run the GUI client
+	go run ./cmd/client
+
+build-client: ## Build client binary
+	go build -o bin/client ./cmd/client
 
 test-cover: ## Run tests with coverage report
 	go test -cover ./...
