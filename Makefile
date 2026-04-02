@@ -1,4 +1,4 @@
-.PHONY: build run test fmt lint help
+.PHONY: build run test fmt lint help run-server build-server test-cover
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
@@ -18,3 +18,12 @@ fmt: ## Format code
 
 lint: ## Run linter
 	golangci-lint run
+
+run-server: ## Run the server (PORT=8080)
+	go run ./cmd/server --port $(or $(PORT),8080)
+
+build-server: ## Build server binary
+	go build -o bin/server ./cmd/server
+
+test-cover: ## Run tests with coverage report
+	go test -cover ./...
