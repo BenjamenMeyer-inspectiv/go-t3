@@ -8,16 +8,10 @@ func NewRouter() http.Handler {
 	mux := http.NewServeMux()
 	// Game routes will be added in Phase 2
 	mux.HandleFunc("/health", healthHandler)
-	mux.HandleFunc("/ping", pingHandler)
 	return mux
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"status":"ok"}`))
-}
-
-func pingHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"ping":"pong"}`))
 }
