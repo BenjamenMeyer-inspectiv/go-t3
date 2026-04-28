@@ -24,6 +24,11 @@ func main() {
 
 	baseURL := fmt.Sprintf("http://%s:%d", host, port)
 
+	fmt.Printf(os.Stdout, "Server: %s\n", baseURL)
+	fmt.Printf(os.Stdout, "-----------\n")
+	fmt.Printf(os.Stdout, "Test Client\n")
+	fmt.Printf(os.Stdout, "-----------\n")
+
 	var path string
 	switch args[0] {
 	case "ping":
