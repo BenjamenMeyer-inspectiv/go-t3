@@ -25,5 +25,8 @@ run-server: ## Run the server (PORT=8080)
 build-server: ## Build server binary
 	go build -o bin/server ./cmd/server
 
+build-client: ## Build server binary
+	go build -o bin/cli ./cmd/client
+
 test-cover: ## Run tests with coverage report
 	go test -cover ./...
