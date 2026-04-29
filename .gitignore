@@ -8,6 +8,9 @@
 *.so
 *.dylib
 go-t3
+server
+client
+bin/
 
 # Test binary, built with `go test -c`
 *.test

@@ -30,6 +30,9 @@ run-client: ## Run the GUI client
 
 build-client: ## Build client binary
 	go build -o bin/client ./cmd/client
+  
+build-cli: ## Build tui cli binary
+	go build -o bin/cli ./cmd/client
 
 test-cover: ## Run tests with coverage report
 	go test -cover ./...

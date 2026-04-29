@@ -9,6 +9,7 @@ Go-based Tic Tac Toe — a REST API server and fyne.io GUI client.
 - User authentication (JWT)
 - Invite a specific opponent or find a random match
 - Cross-platform GUI built with [fyne.io](https://fyne.io)
+- Testing utility
 
 ## Requirements
 
