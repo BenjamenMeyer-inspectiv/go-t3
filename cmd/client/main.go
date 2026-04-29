@@ -6,6 +6,8 @@ import (
 	"io"
 	"net/http"
 	"os"
+  
+  "github.com/BenjamenMeyer-inspectiv/go-t3/internal/ui"
 )
 
 func main() {
@@ -39,6 +41,9 @@ func main() {
 		}
 	case "pong":
 		path = "/pong"
+  case "shell":
+	  ui.Run()
+    os.Exit(0)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command: %s\n", args[0])
 		fmt.Fprintf(os.Stderr, "commands: ping, ping reset, pong\n")
