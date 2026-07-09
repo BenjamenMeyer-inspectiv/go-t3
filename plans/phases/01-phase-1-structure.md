@@ -1,8 +1,8 @@
 # Phase 1: Project Structure — Server + Client Skeleton
 
 **Complexity:** Medium
-**PRs:** #2–#4
-**Release Tag:** v0.2.0 (on PR #4)
+**PRs:** #2–#4 (PR #4 not yet merged — deferred, see Phase 1.5)
+**Release Tag:** v0.2.0 (moved to Phase 1.5 — see `phases/01a-phase-1.5-connectivity-cli-foundation.md`)
 **Branch prefix:** phase/1-
 
 ## Goal
@@ -312,6 +312,8 @@ golangci-lint run
 ```
 
 ### Post-Phase
-- Merge PR #4
-- Tag `v0.2.0`
-- All future PRs will have CI status checks
+- **Deferred.** This PR did not merge before PRs #5-#17 landed off-plan.
+  See `phases/01a-phase-1.5-connectivity-cli-foundation.md` for current
+  status and the merge/tag plan. The file contents specified above (test.yml,
+  lint.yml, build.yml, .golangci.yml) are still the correct target — only
+  the timing changed.
