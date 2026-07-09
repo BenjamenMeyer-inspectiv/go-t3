@@ -1,8 +1,8 @@
 # Phase 3: GUI Frontend Using API
 
 **Complexity:** Medium
-**PRs:** #9–#11
-**Release Tag:** v0.4.0 (on PR #11)
+**PRs:** 4 planned (3 GUI + 1 CLI parity); numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v0.4.0 (on final PR)
 **Branch prefix:** phase/3-
 
 ## Goal
@@ -128,6 +128,54 @@ go run ./cmd/client
 # "New Game" resets the board
 ```
 
+---
+
+## PR — CLI Parity: Play via Text Client
+**Branch:** `phase/3-cli-play`
+
+### Files
+
+#### `cmd/client/main.go` (updated)
+Add a `play` subcommand that drives a full 2-player game over stdin/stdout
+using the same `internal/ui.APIClient` the GUI uses:
+```go
+case "play":
+    playCLI(client)
+```
+
+```go
+func playCLI(client *ui.APIClient) {
+    gameID, _ := client.CreateGame()
+    for {
+        state, _ := client.GetState(gameID)
+        renderBoard(state.Board)
+        if state.Done {
+            fmt.Printf("Result: %s\n", resultText(state.Winner))
+            return
+        }
+        fmt.Printf("Turn: %s. Enter move as row,col (0-2): ", state.Current)
+        var row, col int
+        fmt.Scanf("%d,%d", &row, &col)
+        client.MakeMove(gameID, state.Current, row, col)
+    }
+}
+
+func renderBoard(board [3][3]string) {
+    for _, r := range board {
+        fmt.Println(strings.Join(r[:], " | "))
+    }
+}
+```
+
+### Verification
+```bash
+go run ./cmd/server &
+go run ./cmd/client play
+# Text board renders after each move; alternates X/O prompts
+# Win/draw prints "Result: ..." and exits
+kill %1
+```
+
 ### Post-Phase
-- Merge PR #10
+- Merge final PR (CLI parity)
 - Tag `v0.4.0`
