@@ -7,7 +7,7 @@
 
 ## Goal
 
-Establish the directory layout and skeleton code for both the server backend and GUI frontend, then add GitHub Actions CI so every subsequent PR is automatically tested and linted.
+Establish the directory layout and skeleton code for both the server backend and GUI frontend, then add GitHub Actions CI (deferred — see Phase 1.5) so every subsequent PR is automatically tested and linted.
 
 ## Context Check
 - [x] Phase 0 merged: go.mod, main.go, Makefile, all GitHub community files exist
