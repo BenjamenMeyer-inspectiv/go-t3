@@ -1,8 +1,8 @@
 # Phase 7: Authentication Frontend
 
 **Complexity:** Simple
-**PRs:** #22–#24
-**Release Tag:** v1.2.0 (on PR #24)
+**PRs:** 4 planned (3 GUI/backend-removal + 1 CLI parity); numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v1.2.0 (on final PR)
 **Branch prefix:** phase/7-
 
 ## Goal
@@ -117,6 +117,47 @@ kill %1 %2 %3
 
 ---
 
+## PR — CLI Parity: Auth Subcommands
+**Branch:** `phase/7-cli-auth`
+
+### Files
+
+#### `cmd/client/main.go` (updated)
+Add `login` and `register` subcommands using the same
+`APIClient.Login`/`Register` methods the GUI auth screen calls:
+```go
+case "login":
+    var username, password string
+    fmt.Print("Username: ")
+    fmt.Scanln(&username)
+    fmt.Print("Password: ")
+    fmt.Scanln(&password)
+    if err := client.Login(username, password); err != nil {
+        fmt.Fprintf(os.Stderr, "login failed: %v\n", err)
+        os.Exit(1)
+    }
+    saveToken(client.Token())
+case "register":
+    // same prompt shape, calls client.Register then saveToken
+```
+
+Token persisted to `~/.go-t3/token` via a small `saveToken`/`loadToken` pair
+shared by both subcommands; `play`, `lobby`, `queue`, etc. call `loadToken`
+on startup to restore the session.
+
+### Verification
+```bash
+go run ./cmd/server &
+go run ./cmd/client register
+# Prompts for username/password, registers + logs in, saves token
+
+go run ./cmd/client login
+# Prompts for credentials, on success prints "logged in as <username>"
+kill %1
+```
+
+---
+
 ## PR #24 — Remove --no-auth Flag
 **Branch:** `phase/7-remove-no-auth`
 
@@ -157,5 +198,5 @@ kill %1
 ```
 
 ### Post-Phase
-- Merge PR #24
+- Merge final PR (remove --no-auth, after CLI parity lands)
 - Tag `v1.2.0`
