@@ -1,8 +1,8 @@
 # Phase 2: Server API for 2-Player Game
 
 **Complexity:** Medium
-**PRs:** #5–#8
-**Release Tag:** v0.3.0 (on PR #8)
+**PRs:** 4 planned; numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v0.3.0 (on final PR)
 **Branch prefix:** phase/2-
 
 ## Goal

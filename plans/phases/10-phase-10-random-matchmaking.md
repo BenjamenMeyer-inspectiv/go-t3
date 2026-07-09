@@ -1,8 +1,8 @@
 # Phase 10: Server Random User Matchmaking
 
 **Complexity:** Simple
-**PRs:** #32–#34
-**Release Tag:** v1.5.0 (on PR #34)
+**PRs:** 3 planned; numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v1.5.0 (on final PR)
 **Branch prefix:** phase/10-
 
 ## Goal

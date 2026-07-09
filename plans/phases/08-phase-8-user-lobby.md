@@ -1,8 +1,8 @@
 # Phase 8: Server User Lobby for Game Setup
 
 **Complexity:** Medium
-**PRs:** #25–#28
-**Release Tag:** v1.3.0 (on PR #28)
+**PRs:** 4 planned; numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v1.3.0 (on final PR)
 **Branch prefix:** phase/8-
 
 ## Goal
