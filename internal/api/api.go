@@ -14,6 +14,7 @@ func NewRouter() http.Handler {
 	return mux
 }
 
+// PC-2335 QA-1 write-path verification test (safe, harmless comment)
 func healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"status":"ok"}`))
