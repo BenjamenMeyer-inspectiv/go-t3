@@ -1,8 +1,8 @@
 # Phase 4: Computer AI Backend (Minimax)
 
 **Complexity:** Medium
-**PRs:** #12–#14
-**Release Tag:** v0.5.0 (on PR #14)
+**PRs:** 3 planned; numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v0.5.0 (on final PR)
 **Branch prefix:** phase/4-
 
 ## Goal

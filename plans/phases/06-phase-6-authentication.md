@@ -1,8 +1,8 @@
 # Phase 6: Authentication Backend
 
 **Complexity:** Medium
-**PRs:** #17–#21
-**Release Tag:** v1.1.0 (on PR #21)
+**PRs:** 5 planned; numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v1.1.0 (on final PR)
 **Branch prefix:** phase/6-
 
 ## Goal

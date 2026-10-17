@@ -1,8 +1,8 @@
 # Phase 11: GUI Random Matchmaking Integration
 
 **Complexity:** Simple
-**PRs:** #35–#37
-**Release Tag:** v1.6.0 (on PR #37)
+**PRs:** 4 planned (3 GUI + 1 CLI parity); numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v1.6.0 (on final PR)
 **Branch prefix:** phase/11-
 
 ## Goal
@@ -111,6 +111,44 @@ go run ./cmd/client
 # → Returns to mode selector; carol removed from queue
 ```
 
+---
+
+## PR — CLI Parity: Matchmaking Subcommands
+**Branch:** `phase/11-cli-matchmaking`
+
+### Files
+
+#### `cmd/client/main.go` (updated)
+```go
+case "queue":
+    if len(args) < 2 {
+        fmt.Fprintln(os.Stderr, "usage: cli queue <join|leave|status>")
+        os.Exit(1)
+    }
+    switch args[1] {
+    case "join":
+        resp, _ := client.JoinMatchmaking()
+        fmt.Printf("status: %s\n", resp.Status)
+    case "leave":
+        client.LeaveMatchmaking()
+        fmt.Println("left queue")
+    case "status":
+        resp, _ := client.MatchmakingStatus()
+        fmt.Printf("status: %s\n", resp.Status)
+    }
+```
+
+### Verification
+```bash
+go run ./cmd/server &
+go run ./cmd/client queue join
+# → "status: waiting" or "status: matched"
+
+go run ./cmd/client queue status
+go run ./cmd/client queue leave
+kill %1
+```
+
 ### Post-Phase
-- Merge PR #37
+- Merge final PR (CLI parity)
 - Tag `v1.6.0`

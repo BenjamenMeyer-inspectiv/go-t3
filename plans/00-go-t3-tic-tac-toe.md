@@ -1,6 +1,6 @@
 # Plan: Go Tic-Tac-Toe (go-t3)
 
-**Complexity:** Complex (multi-phase, 37 PRs across 12 phases, client/server architecture)
+**Complexity:** Complex (multi-phase, 13 phases, client/server architecture; exact PR counts vary — see PR Numbering Policy below)
 
 ## Overview
 
@@ -57,71 +57,58 @@ go-t3/
 | Phase | PRs | Description | Tag |
 |-------|-----|-------------|-----|
 | 0 | #1 | Repository bootstrap + GitHub community files | v0.1.0 |
-| 1 | #2–#4 | Project structure + GitHub Actions CI | v0.2.0 |
-| 2 | #5–#8 | Server API for 2-player game | v0.3.0 |
-| 3 | #9–#11 | GUI frontend using API | v0.4.0 |
-| 4 | #12–#14 | Computer AI backend (minimax) | v0.5.0 |
-| 5 | #15–#16 | GUI computer-play integration | v1.0.0 |
-| 6 | #17–#21 | Authentication backend (JWT, register/login) | v1.1.0 |
-| 7 | #22–#24 | Authentication frontend + remove --no-auth | v1.2.0 |
-| 8 | #25–#28 | Server user lobby + game invitations | v1.3.0 |
-| 9 | #29–#31 | GUI opponent selection + invite flow | v1.4.0 |
-| 10 | #32–#34 | Server random matchmaking queue | v1.5.0 |
-| 11 | #35–#37 | GUI random matchmaking integration | v1.6.0 |
+| 1 | #2–#3 | Project structure (server + client skeleton) | — (moved to 1.5) |
+| 1.5 | #4–#17 (actual, retroactive) | Connectivity check + CLI foundation + CI (outstanding) | v0.2.0 (pending) |
+| 2 | 4 planned | Server API for 2-player game | v0.3.0 |
+| 3 | 4 planned (incl. 1 CLI parity) | GUI + CLI frontend using API | v0.4.0 |
+| 4 | 3 planned | Computer AI backend (minimax) | v0.5.0 |
+| 5 | 3 planned (incl. 1 CLI parity) | GUI + CLI computer-play integration | v1.0.0 |
+| 6 | 5 planned | Authentication backend (JWT, register/login) | v1.1.0 |
+| 7 | 4 planned (incl. 1 CLI parity) | Authentication GUI + CLI + remove --no-auth | v1.2.0 |
+| 8 | 4 planned | Server user lobby + game invitations | v1.3.0 |
+| 9 | 4 planned (incl. 1 CLI parity) | GUI + CLI opponent selection + invite flow | v1.4.0 |
+| 10 | 3 planned | Server random matchmaking queue | v1.5.0 |
+| 11 | 4 planned (incl. 1 CLI parity) | GUI + CLI random matchmaking integration | v1.6.0 |
 
-## PR Breakdown
+## PR Breakdown (Historical — Phases 0, 1, 1.5)
 
 | PR | Branch | Description |
 |----|--------|-------------|
 | #1 | phase/0-bootstrap | go.mod, main.go, Makefile, GitHub community files |
 | #2 | phase/1-server-skeleton | cmd/server, internal/game stub, internal/api stub |
 | #3 | phase/1-client-skeleton | cmd/client, internal/ui stub, pkg/t3, fyne dep |
-| #4 | phase/1-github-actions | test.yml, lint.yml, build.yml, .golangci.yml |
-| #5 | phase/2-game-logic | internal/game expanded + tests |
-| #6 | phase/2-api-types | pkg/t3 request/response types |
-| #7 | phase/2-create-and-get | POST /games + GET /games/{id} |
-| #8 | phase/2-move-endpoint | POST /games/{id}/move |
-| #9 | phase/3-api-client | internal/ui/client.go |
-| #10 | phase/3-board-widget | internal/ui/board.go |
-| #11 | phase/3-game-window | internal/ui/ui.go wiring + --server flag |
-| #12 | phase/4-minimax | internal/ai package + tests |
-| #13 | phase/4-game-mode-types | GameMode types in pkg/t3 |
-| #14 | phase/4-server-ai | API auto-play computer moves |
-| #15 | phase/5-board-cell-control | Board per-cell enable/disable + CreateGame sig |
-| #16 | phase/5-mode-selector | Mode selector UI + computer player selector |
-| #17 | phase/6-no-auth-flag | --no-auth server flag for client compat |
-| #18 | phase/6-register | UserStore + POST /auth/register |
-| #19 | phase/6-login | POST /auth/login + JWT signing |
-| #20 | phase/6-me-endpoint | GET /auth/me + ValidateToken |
-| #21 | phase/6-auth-middleware | AuthMiddleware + gate /games/* |
-| #22 | phase/7-client-auth-methods | APIClient token storage + auth methods |
-| #23 | phase/7-auth-screen | Login/register GUI screen |
-| #24 | phase/7-remove-no-auth | Remove --no-auth flag, auth always required |
-| #25 | phase/8-online-users | UserStore MarkOnline + GET /users/online |
-| #26 | phase/8-game-status-types | GameStatus lifecycle + pkg/t3 invite types |
-| #27 | phase/8-invite-endpoints | POST /games/invite + GET /games/invites |
-| #28 | phase/8-accept-decline | POST /games/{id}/accept + /decline + tests |
-| #29 | phase/9-client-lobby-methods | APIClient lobby/invite methods |
-| #30 | phase/9-lobby-widget | LobbyWidget + board playerSide |
-| #31 | phase/9-invite-flow | Invite flow wiring in ui.go |
-| #32 | phase/10-queue-package | internal/matchmaking package + tests |
-| #33 | phase/10-join-leave | POST + DELETE /matchmaking/join |
-| #34 | phase/10-status-endpoint | GET /matchmaking/status |
-| #35 | phase/11-client-matchmaking-methods | APIClient matchmaking methods |
-| #36 | phase/11-matchmaking-widget | MatchmakingWidget (status label + cancel) |
-| #37 | phase/11-random-match-ui | Mode selector 4th option + polling flow |
+| #4–#5 | BenjamenMeyer-inspectiv-patch-1 | dependabot.yml create/update |
+| #6 | enhancement-gitignore | .gitignore config |
+| #7–#13 | enhancement-more, enhancement-less, cleanup_1, cleanup_2, enhancement_ping2, enhancement_ping-reset, enhancement-pong2 | Iterative /ping, /pong, /ping/reset build-out |
+| #14 | enhancement_basic-client | CLI dispatch (ping/pong/shell) in cmd/client/main.go |
+| #15 | enhancment_cli_add-banner | CLI banner output |
+| #16 | enhancement-update-readme-1 | README line addition |
+| #17 | dependabot/go_modules/fyne.io/fyne/v2-2.7.4 | fyne 2.7.3 → 2.7.4 bump |
+
+Full detail for the connectivity-check and CLI-foundation work is in
+[Phase 1.5](phases/01a-phase-1.5-connectivity-cli-foundation.md).
+
+## PR Numbering Policy (Phase 2 onward)
+
+Phase files describe planned PRs by purpose and order, not by predicted
+GitHub number — numbers get assigned automatically at PR creation and drift
+whenever off-plan work merges in between (as already happened once: PR #4
+was predicted to be CI workflows, actually landed as a dependabot patch).
+Once a phase's PRs merge, its phase file gains a short
+`**Actual PRs:** #N, #N+1, ...` line recording what really happened.
 
 ## Phase Files
 
 - [Phase 0](phases/00-phase-0-bootstrap.md) — Bootstrap + GitHub Community Files
-- [Phase 1](phases/01-phase-1-structure.md) — Structure + GitHub Actions CI
+- [Phase 1](phases/01-phase-1-structure.md) — Structure (CI deferred to 1.5)
+- [Phase 1.5](phases/01a-phase-1.5-connectivity-cli-foundation.md) — Connectivity Check + CLI Foundation
 - [Phase 2](phases/02-phase-2-server-api.md) — Server API
-- [Phase 3](phases/03-phase-3-gui-frontend.md) — GUI Frontend
+- [Phase 3](phases/03-phase-3-gui-frontend.md) — GUI + CLI Frontend
 - [Phase 4](phases/04-phase-4-ai-backend.md) — AI Backend
-- [Phase 5](phases/05-phase-5-gui-ai-integration.md) — GUI AI Integration
+- [Phase 5](phases/05-phase-5-gui-ai-integration.md) — GUI + CLI AI Integration
 - [Phase 6](phases/06-phase-6-authentication.md) — Authentication Backend
-- [Phase 7](phases/07-phase-7-auth-frontend.md) — Authentication Frontend
+- [Phase 7](phases/07-phase-7-auth-frontend.md) — Authentication GUI + CLI Frontend
 - [Phase 8](phases/08-phase-8-user-lobby.md) — User Lobby + Invitations
-- [Phase 9](phases/09-phase-9-gui-opponent-selection.md) — GUI Opponent Selection
+- [Phase 9](phases/09-phase-9-gui-opponent-selection.md) — GUI + CLI Opponent Selection
 - [Phase 10](phases/10-phase-10-random-matchmaking.md) — Server Random Matchmaking
-- [Phase 11](phases/11-phase-11-gui-random-matchmaking.md) — GUI Random Matchmaking
+- [Phase 11](phases/11-phase-11-gui-random-matchmaking.md) — GUI + CLI Random Matchmaking

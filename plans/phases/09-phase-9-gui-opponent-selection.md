@@ -1,8 +1,8 @@
 # Phase 9: GUI Opponent Selection and Game Invitation
 
 **Complexity:** Medium
-**PRs:** #29–#31
-**Release Tag:** v1.4.0 (on PR #31)
+**PRs:** 4 planned (3 GUI + 1 CLI parity); numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v1.4.0 (on final PR)
 **Branch prefix:** phase/9-
 
 ## Goal
@@ -116,6 +116,51 @@ go run ./cmd/client
 # Take turns; each side only clicks their own cells
 ```
 
+---
+
+## PR — CLI Parity: Lobby + Invite Subcommands
+**Branch:** `phase/9-cli-lobby`
+
+### Files
+
+#### `cmd/client/main.go` (updated)
+```go
+case "lobby":
+    users, _ := client.OnlineUsers()
+    for _, u := range users {
+        fmt.Println(u.Username)
+    }
+case "invite":
+    // args[1] = username to invite
+    gameID, _ := client.InviteUser(resolveUserID(args[1]), t3.ModeTwoPlayer)
+    fmt.Printf("Invited. game_id=%s\n", gameID)
+case "invites":
+    invites, _ := client.PendingInvites()
+    for _, inv := range invites {
+        fmt.Printf("%s wants to play (game_id=%s)\n", inv.FromUsername, inv.GameID)
+    }
+case "accept":
+    client.AcceptInvite(args[1]) // args[1] = game_id
+case "decline":
+    client.DeclineInvite(args[1])
+```
+
+### Verification
+```bash
+go run ./cmd/server &
+go run ./cmd/client lobby
+# → lists online usernames
+
+go run ./cmd/client invite bob
+# → "Invited. game_id=..."
+
+go run ./cmd/client invites
+# (as bob) → "alice wants to play (game_id=...)"
+
+go run ./cmd/client accept <game_id>
+kill %1
+```
+
 ### Post-Phase
-- Merge PR #31
+- Merge final PR (CLI parity)
 - Tag `v1.4.0`

@@ -1,8 +1,8 @@
 # Phase 5: GUI Computer-Play Integration
 
 **Complexity:** Simple
-**PRs:** #15–#16
-**Release Tag:** v1.0.0 (on PR #16)
+**PRs:** 3 planned (2 GUI + 1 CLI parity); numbers assigned at merge — see PR Numbering Policy in master plan
+**Release Tag:** v1.0.0 (on final PR)
 **Branch prefix:** phase/5-
 
 ## Goal
@@ -74,8 +74,34 @@ go run ./cmd/client
 # Human plays O
 ```
 
+---
+
+## PR — CLI Parity: Mode Selection
+**Branch:** `phase/5-cli-mode-selector`
+
+### Files
+
+#### `cmd/client/main.go` (updated)
+`play` subcommand gains a `--mode` flag:
+```go
+flag.StringVar(&mode, "mode", "two_player", "two_player or vs_computer")
+flag.StringVar(&computerPlayer, "computer-player", "O", "X or O, only used with vs_computer")
+```
+When `vs_computer`, `CreateGame` is called with `(mode, computerPlayer)` per
+the Phase 5 GUI signature change, and `playCLI` skips prompting for moves on
+the computer's turn — it just re-polls `GetState` until `Current` matches
+the human side.
+
+### Verification
+```bash
+go run ./cmd/server &
+go run ./cmd/client play --mode=vs_computer --computer-player=O
+# Human plays X, computer auto-responds as O after each human move
+kill %1
+```
+
 ### Post-Phase
-- Merge PR #15
+- Merge final PR (CLI parity)
 - Tag `v1.0.0`
 
 ## v1.0.0 Release Notes Template
